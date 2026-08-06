@@ -3,38 +3,48 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#FFF8F0] border-t border-amber-200 pt-8 lg:pt-16 pb-8">
+    <footer className="bg-[#FFF8F0] border-t border-amber-200 pt-8 lg:pt-16 pb-8 print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
-            <Link
-  href="/"
-  className="items-center gap-3 group mb-2"
->
-  <Image
-    src="/logo.jpeg"
-    alt="Dudheshwar Mahadev Mandir Logo"
-    width={80}
-    height={80}
-    priority
-    className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform duration-300"
-  />
+  <Link href="/" className="group mb-2 block">
+    {/* Logo + Trust Name */}
+    <div className="flex items-center gap-3 mb-3">
+      <Image
+        src="/logo.jpeg"
+        alt="Dudheshwar Mahadev Mandir Logo"
+        width={80}
+        height={80}
+        priority
+        className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform duration-300"
+      />
 
-  <h2 className="font-serif text-sm md:text-2xl font-bold text-red-800 group-hover:text-red-700 transition-colors">
-    Dudheshwar Mahadev Mandir
-  </h2>
-</Link>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              A place of peace, devotion, and spiritual awakening. Join us in our daily prayers and community services.
-            </p>
-          </div>
+      <div className="px-3 py-1.5 rounded-md border border-amber-300 bg-amber-50 shadow-sm">
+  <h3 className="font-serif text-xs md:text-base font-bold text-red-800 leading-tight whitespace-nowrap">
+    Lala SaiRam <br />
+    Mithal Kutumb Trust
+  </h3>
+</div>
+    </div>
+
+    {/* Existing Heading */}
+    <h2 className="font-serif text-sm md:text-2xl font-bold text-red-800 group-hover:text-red-700 transition-colors">
+      Dudheshwar Mahadev Mandir
+    </h2>
+  </Link>
+
+  <p className="text-gray-600 text-sm leading-relaxed">
+    A place of peace, devotion, and spiritual awakening. Join us in our daily prayers and community services.
+  </p>
+</div>
 
           {/* Quick Links */}
           <div>
             <h3 className="font-serif text-xl font-bold mb-4 text-red-800">Quick Links</h3>
             <ul className="space-y-3">
               <li><Link href="/about" className="text-gray-600 hover:text-amber-600 font-medium transition-colors flex items-center gap-2"><span className="text-amber-400">▪</span> About Us</Link></li>
+              <li><Link href="/familyTree" className="text-gray-600 hover:text-amber-600 font-medium transition-colors flex items-center gap-2"><span className="text-amber-400">▪</span> Family Tree</Link></li>
               <li><Link href="/services" className="text-gray-600 hover:text-amber-600 font-medium transition-colors flex items-center gap-2"><span className="text-amber-400">▪</span> Services</Link></li>
               <li><Link href="/gallery" className="text-gray-600 hover:text-amber-600 font-medium transition-colors flex items-center gap-2"><span className="text-amber-400">▪</span> Gallery</Link></li>
               <li><Link href="/contact" className="text-gray-600 hover:text-amber-600 font-medium transition-colors flex items-center gap-2"><span className="text-amber-400">▪</span> Contact Us</Link></li>
@@ -57,7 +67,7 @@ export default function Footer() {
             <h3 className="font-serif text-xl font-bold mb-4 text-red-800">Contact Us</h3>
             <ul className="space-y-3 text-gray-600 font-medium">
               <li>
-                <a href="https://maps.google.com/?q=123+Spiritual+Way,+Meerut,+Uttar+Pradesh,+India+250001" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-amber-600 transition-colors cursor-pointer group">
+                <a href="https://www.google.com/maps/place/Dudheshvar+Mahadev+Mandir+(Lala+Sairam+Mittal+Kutumb+Trust)/@28.8769006,77.5349301,17z/data=!3m1!4b1!4m5!3m4!1s0x390c5f8be1f69007:0xe7780d538a901fcf!8m2!3d28.8769006!4d77.5349301" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-amber-600 transition-colors cursor-pointer group">
                   <span className="text-amber-500 text-lg mt-0.5 group-hover:scale-110 transition-transform">📍</span>
                   <span>Shiv Puri ward, Niwari , Modinagar -201204</span>
                 </a>
@@ -88,12 +98,12 @@ export default function Footer() {
 
         <div className="border-t border-amber-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left text-gray-500 text-sm font-medium gap-6 md:gap-0">
           <div>
-            <span className="block lg:inline">&copy; {new Date().getFullYear()} <span className="text-gray-800 font-bold">Lala Sai Ram</span>.</span>
+            <span className="block lg:inline">&copy; {new Date().getFullYear()} <span className="text-gray-800 font-bold">Lala SaiRam Mithal Kutumb Trust</span>.</span>
             <span className="block lg:inline lg:ml-1 mt-1 lg:mt-0">All Rights Reserved.</span>
           </div>
           <div className="md:text-right">
             <span className="block lg:inline">Designed and Developed By</span>
-            <Link href="https://kusheldigital.com" target="_blank" rel="noopener noreferrer" className="block lg:inline lg:ml-1 mt-1 lg:mt-0 text-amber-600 hover:text-red-700 font-bold">
+            <Link href="https://kusheldigi.com" target="_blank" rel="noopener noreferrer" className="block lg:inline lg:ml-1 mt-1 lg:mt-0 text-amber-600 hover:text-red-700 font-bold">
               Kushel Digi Solutions
             </Link>
           </div>

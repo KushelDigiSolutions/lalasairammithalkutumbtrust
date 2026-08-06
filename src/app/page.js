@@ -1,13 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import NewsletterForm from './NewsletterForm';
+import festivals from "@/data/festivals.json";
 export default function Home() {
+  const today = new Date();
+
+  const upcomingFestivals = festivals
+  .filter((festival) => new Date(festival.date) >= today)
+  .sort((a, b) => new Date(a.date) - new Date(b.date))
+  .slice(0, 4);
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAF8] w-full overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-[85vh] w-full flex-shrink-0 flex items-center justify-center py-20 overflow-hidden">
         <Image
-          src="https://res.cloudinary.com/hne4dpfq/image/upload/v1785835711/ChatGPT_Image_Aug_4_2026_02_57_58_PM_dn1zce.png"
+          src="https://res.cloudinary.com/hne4dpfq/image/upload/v1785935512/ChatGPT_Image_Aug_5_2026_06_40_35_PM_wtse52.png"
           alt="Lala Sai Ram at Sunset"
           fill
           className="object-cover object-center"
@@ -259,64 +266,50 @@ text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
 
     <div className="grid gap-8 md:grid-cols-2">
 
-      {[
-        {
-          day: "09",
-          month: "AUG",
-          title: "Raksha Bandhan",
-          icon: "🪢",
-          desc: "Special blessings for brothers and sisters followed by evening Aarti and Prasadam."
-        },
-        {
-          day: "16",
-          month: "AUG",
-          title: "Krishna Janmashtami",
-          icon: "🦚",
-          desc: "Midnight Janmotsav, Jhanki Darshan, Bhajan Sandhya, Abhishek and Maha Prasadam."
-        },
-        {
-          day: "27",
-          month: "AUG",
-          title: "Ganesh Chaturthi",
-          icon: "🐘",
-          desc: "Special Ganesh Puja, Modak Bhog, Sankat Nashak Path and Evening Aarti."
-        },
-        {
-          day: "12",
-          month: "OCT",
-          title: "Sharad Navratri",
-          icon: "🌺",
-          desc: "Nine days of Durga Puja, Bhajan, Kanya Pujan and daily spiritual programs."
-        },
-      ].map((festival) => (
-        <div
-          key={festival.title}
-          className="bg-white rounded-3xl border border-amber-100 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden group"
-        >
-          <div className="flex">
+      {upcomingFestivals.map((festival) => {
+        const date = new Date(festival.date);
 
-            <div className="bg-gradient-to-b from-red-700 to-red-900 text-white w-28 flex flex-col justify-center items-center p-6">
-              <div className="text-3xl mb-2">{festival.icon}</div>
-              <div className="text-3xl font-bold">{festival.day}</div>
-              <div className="uppercase tracking-wider text-sm">
-                {festival.month}
+        return (
+          <div
+            key={`${festival.title}-${festival.date}`}
+            className="bg-white rounded-3xl border border-amber-100 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden group"
+          >
+            <div className="flex">
+
+              <div className="bg-gradient-to-b from-red-700 to-red-900 text-white w-28 flex flex-col justify-center items-center p-6">
+
+                <div className="text-3xl mb-2">
+                  {festival.icon}
+                </div>
+
+                <div className="text-3xl font-bold">
+                  {date.getDate()}
+                </div>
+
+                <div className="uppercase tracking-wider text-sm">
+                  {date.toLocaleString("en-US", {
+                    month: "short",
+                  }).toUpperCase()}
+                </div>
+
               </div>
+
+              <div className="flex-1 p-7">
+
+                <h3 className="font-serif text-2xl font-bold text-red-800 mb-3">
+                  {festival.title}
+                </h3>
+
+                <p className="text-gray-600 leading-7">
+                  {festival.desc}
+                </p>
+
+              </div>
+
             </div>
-
-            <div className="flex-1 p-7">
-              <h3 className="font-serif text-2xl font-bold text-red-800 mb-3">
-                {festival.title}
-              </h3>
-
-              <p className="text-gray-600 leading-7">
-                {festival.desc}
-              </p>
-
-            </div>
-
           </div>
-        </div>
-      ))}
+        );
+      })}
 
     </div>
 

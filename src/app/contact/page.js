@@ -44,9 +44,9 @@ export default function Contact() {
                 <span className="text-2xl mt-1">📍</span>
                 <div>
                   <h3 className="font-bold text-base md:text-lg text-gray-800">Lala SaiRam Mittal Kutumb Trust</h3>
-                  <p className="text-gray-600 mt-1 text-sm md:text-base">Reg Add : B-46, Samrat Palace , 
-                  Garh Road, Meerut -250004.
-                  Mandir Add : Shiv Puri ward,
+                  <p className="text-gray-600 mt-1 text-sm md:text-base"><b> Reg Add :</b>B-46, Samrat Palace , 
+                  Garh Road, Meerut -250004.<br/>
+                  <b>Mandir Add :</b>Shiv Puri ward,
                   Niwari , Modinagar -201204</p>
                 </div>
               </div>

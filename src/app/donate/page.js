@@ -25,7 +25,7 @@ export default function Donate() {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 md:mt-16 w-full">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 md:mt-16 w-full">
         <div className="bg-white p-6 md:p-12 rounded-3xl shadow-xl border border-saffron/20 text-center">
           <span className="text-5xl md:text-6xl mb-4 md:mb-6 inline-block">🙏</span>
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-red-800 mb-3 md:mb-4">Support Our Mission</h2>
@@ -33,34 +33,34 @@ export default function Donate() {
             We are currently setting up our secure online payment gateway. In the meantime, you can make donations via Bank Transfer or by visiting the Mandir office in person.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 md:mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-6 mb-6 md:mb-8">
             <div className="bg-gray-50 p-5 md:p-6 rounded-xl text-left border border-gray-200">
               <h3 className="font-bold text-gray-800 mb-4 border-b pb-2 text-base md:text-lg">Bank Transfer</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-y-1 sm:gap-y-3 gap-x-2 text-gray-600 text-sm md:text-base">
+              <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-y-1 sm:gap-y-3 gap-x-4 text-gray-600 text-sm md:text-base">
                 <div className="font-semibold text-gray-800 mt-2 sm:mt-0">Account Name:</div>
-                <div className="sm:font-medium"> Lala sairam mittal kutumb trust</div>
+                <div className="sm:font-medium break-words">Lala sairam mittal kutumb trust</div>
                 
                 <div className="font-semibold text-gray-800 mt-2 sm:mt-0">Bank:</div>
-                <div className="sm:font-medium">Indusind bank </div>
+                <div className="sm:font-medium break-words">Indusind bank</div>
                 
                 <div className="font-semibold text-gray-800 mt-2 sm:mt-0">Account Number:</div>
-                <div className="sm:font-medium"> 201037179617</div>
+                <div className="sm:font-medium break-words">201037179617</div>
                 
                 <div className="font-semibold text-gray-800 mt-2 sm:mt-0">IFSC Code:</div>
-                <div className="sm:font-medium">INDB0000410</div>
+                <div className="sm:font-medium break-words">INDB0000410</div>
               </div>
             </div>
 
             <div className="bg-gray-50 p-5 md:p-6 rounded-xl text-center border border-gray-200 flex flex-col items-center justify-center">
               <h3 className="font-bold text-gray-800 mb-4 border-b pb-2 text-base md:text-lg w-full text-left">Scan & Pay (UPI)</h3>
               <div className="relative w-32 h-32 md:w-40 md:h-40 bg-white rounded-xl overflow-hidden shadow-md mb-3">
-  <Image
-    src="https://res.cloudinary.com/hne4dpfq/image/upload/v1785839279/Screenshot_2026-08-04_155730_xpikfk.png"
-    alt="Temple UPI QR Code"
-    fill
-    className="object-contain p-2"
-  />
-</div>
+                <Image
+                  src="https://res.cloudinary.com/hne4dpfq/image/upload/v1785839279/Screenshot_2026-08-04_155730_xpikfk.png"
+                  alt="Temple UPI QR Code"
+                  fill
+                  className="object-contain p-2"
+                />
+              </div>
               <p className="text-xs md:text-sm text-gray-600 font-bold">UPI ID: pos.5364711@indus</p>
             </div>
           </div>

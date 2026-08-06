@@ -11,7 +11,7 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar has high z-index to stay above the drawer and overlay */}
-      <nav className="bg-white/95 backdrop-blur-md sticky top-0 z-[60] border-b border-amber-200 shadow-sm transition-all h-20">
+      <nav className="bg-white/95 backdrop-blur-md sticky top-0 z-[60] border-b border-amber-200 shadow-sm transition-all h-20 print:hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex justify-between items-center h-full">
             <div className="flex-shrink-0 flex items-center">
@@ -39,6 +39,10 @@ export default function Navbar() {
               </Link>
               <Link href="/about" className="text-gray-700 hover:text-amber-600 font-medium transition-colors relative group">
                 About Us
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-500 transition-all group-hover:w-full"></span>
+              </Link>
+              <Link href="/familyTree" className="text-gray-700 hover:text-amber-600 font-medium transition-colors relative group">
+                Family Tree
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link href="/services" className="text-gray-700 hover:text-amber-600 font-medium transition-colors relative group">
@@ -98,6 +102,7 @@ export default function Navbar() {
         <div className="px-6 py-8 space-y-4 w-full flex flex-col flex-grow overflow-y-auto">
           <Link href="/" onClick={closeMenu} className="block text-gray-800 font-medium text-lg hover:text-amber-600 hover:translate-x-2 transition-all p-3 rounded-lg hover:bg-amber-50">Home</Link>
           <Link href="/about" onClick={closeMenu} className="block text-gray-800 font-medium text-lg hover:text-amber-600 hover:translate-x-2 transition-all p-3 rounded-lg hover:bg-amber-50">About Us</Link>
+          <Link href="/familyTree" onClick={closeMenu} className="block text-gray-800 font-medium text-lg hover:text-amber-600 hover:translate-x-2 transition-all p-3 rounded-lg hover:bg-amber-50">Family Tree</Link>
           <Link href="/services" onClick={closeMenu} className="block text-gray-800 font-medium text-lg hover:text-amber-600 hover:translate-x-2 transition-all p-3 rounded-lg hover:bg-amber-50">Services</Link>
           <Link href="/gallery" onClick={closeMenu} className="block text-gray-800 font-medium text-lg hover:text-amber-600 hover:translate-x-2 transition-all p-3 rounded-lg hover:bg-amber-50">Gallery</Link>
           <Link href="/contact" onClick={closeMenu} className="block text-gray-800 font-medium text-lg hover:text-amber-600 hover:translate-x-2 transition-all p-3 rounded-lg hover:bg-amber-50">Contact</Link>

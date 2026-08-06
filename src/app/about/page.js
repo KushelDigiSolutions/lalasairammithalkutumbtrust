@@ -18,10 +18,20 @@ export default function About() {
   priority
 />
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center px-4 w-full">
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-md">About Lala Sai Ram</h1>
-          <div className="w-16 md:w-24 h-1 md:h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full"></div>
-        </div>
+
+<div className="relative z-10 text-center px-4 w-full">
+  <h1 className="font-serif font-bold text-white drop-shadow-md leading-tight">
+    <span className="block text-3xl sm:text-4xl md:text-5xl mb-2">
+      About Dudheshwar Mahadev
+    </span>
+
+    <span className="block text-2xl sm:text-3xl md:text-4xl text-amber-200">
+      Lala SaiRam Kutumb Trust
+    </span>
+  </h1>
+
+  <div className="w-16 md:w-24 h-1 md:h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full mt-5"></div>
+</div>
       </div>
 
       {/* Content Section */}
@@ -36,8 +46,8 @@ export default function About() {
             {/* Timeline Item 1 */}
             <div className="relative md:flex items-center justify-between group">
               <div className="md:w-5/12 text-left md:text-right pr-0 md:pr-8 mb-4 md:mb-0">
-                <h3 className="font-bold text-lg sm:text-xl text-gray-800 break-words">1780: The Inception</h3>
-                <p className="text-gray-600 mt-2 text-sm md:text-base break-words">Established over 250 years ago by the Lala Sai Ram family as the sacred Char Pita Shiya Temple.</p>
+                <h3 className="font-bold text-lg sm:text-xl text-gray-800 break-words">1800: The Inception</h3>
+                <p className="text-gray-600 mt-2 text-sm md:text-base break-words">Established over 200 years ago by the Lala SaiRam Mithal family</p>
               </div>
               <div className="absolute top-1 -left-[37px] md:static md:w-2/12 flex justify-center">
                 <div className="w-6 h-6 bg-saffron rounded-full border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300"></div>
@@ -53,7 +63,7 @@ export default function About() {
               </div>
               <div className="md:w-5/12 text-left pl-0 md:pl-8 mb-4 md:mb-0">
                 <h3 className="font-bold text-lg sm:text-xl text-gray-800 break-words">1960: Mandir Expansion</h3>
-                <p className="text-gray-600 mt-2 text-sm md:text-base break-words">The main hall was constructed to accommodate the growing number of devotees during festivals.</p>
+                <p className="text-gray-600 mt-2 text-sm md:text-base break-words">constructed to accommodate the growing number of devotees during festivals.</p>
               </div>
             </div>
 
@@ -86,12 +96,11 @@ export default function About() {
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-red-800 mb-3 md:mb-4">Our Mission</h2>
           <ul className="list-disc pl-5 md:pl-6 space-y-2 mt-3 md:mt-4">
             <li>To promote spiritual awareness and the teachings of Sanatana Dharma.</li>
-            <li>To serve the community through various charitable initiatives, including food donation and education.</li>
             <li>To preserve and celebrate our rich cultural heritage through festivals and religious ceremonies.</li>
             <li>To provide a peaceful environment for meditation, prayer, and inner reflection.</li>
           </ul>
         </section>
-        <section>
+        {/* <section>
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-red-800 mb-3 md:mb-4">Temple Architecture</h2>
           <div className="bg-saffron/5 p-6 md:p-8 rounded-2xl border border-saffron/20 shadow-sm">
             <p className="mb-4">
@@ -101,7 +110,7 @@ export default function About() {
               The main sanctum sanctorum (Garbhagriha) is designed to align with the sun's rays on Ram Navami, illuminating the deity's idol perfectly at noon.
             </p>
           </div>
-        </section>
+        </section> */}
 
         <section>
   <h2 className="font-serif text-2xl md:text-3xl font-bold text-red-800 mb-3 md:mb-4">
@@ -116,7 +125,7 @@ export default function About() {
       </div>
       <div>
         <h3 className="font-bold text-gray-800 text-base md:text-lg leading-tight">
-          Anil Mittal
+          Anil Mithal
         </h3>
         <p className="text-saffron font-medium text-sm md:text-base mt-1">
           President
@@ -131,7 +140,7 @@ export default function About() {
       </div>
       <div>
         <h3 className="font-bold text-gray-800 text-base md:text-lg leading-tight">
-          Sital Mittal
+          Shikhar Mithal
         </h3>
         <p className="text-saffron font-medium text-sm md:text-base mt-1">
           Secretary
@@ -146,7 +155,7 @@ export default function About() {
       </div>
       <div>
         <h3 className="font-bold text-gray-800 text-base md:text-lg leading-tight">
-          Pawan Kumar Mittal
+          Pawan Kumar Mithal
         </h3>
         <p className="text-saffron font-medium text-sm md:text-base mt-1">
           Treasurer

@@ -1,0 +1,776 @@
+[
+  {
+    "date": "2026-08-09",
+    "title": "Kamika Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi dedicated to Lord Vishnu."
+  },
+  {
+    "date": "2026-08-12",
+    "title": "Shravana Amavasya",
+    "icon": "🌑",
+    "desc": "New Moon day observed with prayers and offerings."
+  },
+  {
+    "date": "2026-08-15",
+    "title": "Hariyali Teej",
+    "icon": "🌿",
+    "desc": "Festival celebrating the monsoon and Goddess Parvati."
+  },
+  {
+    "date": "2026-08-17",
+    "title": "Nag Panchami",
+    "icon": "🐍",
+    "desc": "Traditional worship of Nag Devta."
+  },
+  {
+    "date": "2026-08-17",
+    "title": "Simha Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Simha (Leo)."
+  },
+  {
+    "date": "2026-08-23",
+    "title": "Shravana Putrada Ekadashi",
+    "icon": "🪔",
+    "desc": "Ekadashi observed for the well-being of children."
+  },
+  {
+    "date": "2026-08-28",
+    "title": "Varalakshmi Vrat",
+    "icon": "🪷",
+    "desc": "Sacred fast dedicated to Goddess Lakshmi."
+  },
+  {
+    "date": "2026-08-28",
+    "title": "Raksha Bandhan",
+    "icon": "🪢",
+    "desc": "Festival celebrating the bond between brothers and sisters."
+  },
+  {
+    "date": "2026-08-28",
+    "title": "Gayatri Jayanti",
+    "icon": "📿",
+    "desc": "Celebration dedicated to Goddess Gayatri."
+  },
+  {
+    "date": "2026-08-28",
+    "title": "Shravana Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of the month of Shravana."
+  },
+  {
+    "date": "2026-08-31",
+    "title": "Kajari Teej",
+    "icon": "🌿",
+    "desc": "Traditional Teej festival observed in Bhadrapada."
+  },
+  {
+    "date": "2026-09-04",
+    "title": "Krishna Janmashtami",
+    "icon": "🦚",
+    "desc": "Birth anniversary of Lord Krishna."
+  },
+  {
+    "date": "2026-09-14",
+    "title": "Ganesh Chaturthi",
+    "icon": "🐘",
+    "desc": "Birth celebration of Lord Ganesha."
+  },
+  {
+    "date": "2026-09-28",
+    "title": "Sharad Purnima",
+    "icon": "🌕",
+    "desc": "Holy harvest full moon festival."
+  },
+  {
+    "date": "2026-10-12",
+    "title": "Sharad Navratri Begins",
+    "icon": "🌺",
+    "desc": "Beginning of the nine-day worship of Goddess Durga."
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Durga Ashtami",
+    "icon": "🪷",
+    "desc": "One of the most sacred days of Navratri."
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Maha Navami",
+    "icon": "🙏",
+    "desc": "Ninth day of Navratri."
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Vijayadashami (Dussehra)",
+    "icon": "🏹",
+    "desc": "Victory of good over evil."
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Sharad Purnima (Regional Observance)",
+    "icon": "🌕",
+    "desc": "Full moon observance in regional traditions."
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Karwa Chauth",
+    "icon": "🌙",
+    "desc": "Sacred fast observed by married women."
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Dhanteras",
+    "icon": "🪙",
+    "desc": "Beginning of the Diwali festival."
+  },
+  {
+    "date": "2026-11-08",
+    "title": "Naraka Chaturdashi",
+    "icon": "🪔",
+    "desc": "Chhoti Diwali."
+  },
+  {
+    "date": "2026-11-08",
+    "title": "Diwali",
+    "icon": "🪔",
+    "desc": "Festival of Lights."
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Govardhan Puja",
+    "icon": "⛰️",
+    "desc": "Worship of Govardhan Hill."
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Bhai Dooj",
+    "icon": "👫",
+    "desc": "Festival celebrating the bond of brothers and sisters."
+  },
+  {
+    "date": "2026-11-15",
+    "title": "Chhath Puja",
+    "icon": "🌞",
+    "desc": "Devotional worship of Surya Dev."
+  },
+  {
+    "date": "2026-11-24",
+    "title": "Kartik Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Kartik month."
+  },
+  {
+    "date": "2026-12-11",
+    "title": "Gita Jayanti",
+    "icon": "📖",
+    "desc": "Celebration of the Bhagavad Gita."
+  },
+  {
+    "date": "2026-12-19",
+    "title": "Mokshada Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi associated with Bhagavad Gita."
+  },
+  {
+    "date": "2026-12-24",
+    "title": "Margashirsha Purnima",
+    "icon": "🌕",
+    "desc": "Full moon day of Margashirsha month."
+  },
+  {
+    "date": "2027-01-03",
+    "title": "Saphala Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi dedicated to Lord Vishnu."
+  },
+  {
+    "date": "2027-01-15",
+    "title": "Makar Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Makara (Capricorn)."
+  },
+  {
+    "date": "2027-01-18",
+    "title": "Pausha Putrada Ekadashi",
+    "icon": "🪔",
+    "desc": "Ekadashi observed for blessings of children."
+  },
+  {
+    "date": "2027-01-22",
+    "title": "Pausha Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Pausha month."
+  },
+  {
+    "date": "2027-01-25",
+    "title": "Sakat Chauth",
+    "icon": "🌙",
+    "desc": "Sacred fast dedicated to Lord Ganesha."
+  },
+  {
+    "date": "2027-02-02",
+    "title": "Shattila Ekadashi",
+    "icon": "🪔",
+    "desc": "Important Ekadashi observed in Magha."
+  },
+  {
+    "date": "2027-02-06",
+    "title": "Mauni Amavasya",
+    "icon": "🌑",
+    "desc": "Sacred new moon dedicated to silence and holy bathing."
+  },
+  {
+    "date": "2027-02-11",
+    "title": "Vasant Panchami",
+    "icon": "📚",
+    "desc": "Festival dedicated to Goddess Saraswati."
+  },
+  {
+    "date": "2027-02-13",
+    "title": "Ratha Saptami",
+    "icon": "☀️",
+    "desc": "Festival dedicated to Surya Dev."
+  },
+  {
+    "date": "2027-02-17",
+    "title": "Jaya Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi observed during Magha."
+  },
+  {
+    "date": "2027-02-20",
+    "title": "Magha Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Magha month."
+  },
+  {
+    "date": "2027-03-04",
+    "title": "Vijaya Ekadashi",
+    "icon": "🪔",
+    "desc": "Ekadashi observed for victory and success."
+  },
+  {
+    "date": "2027-03-06",
+    "title": "Maha Shivaratri",
+    "icon": "🔱",
+    "desc": "Grand celebration dedicated to Lord Shiva."
+  },
+  {
+    "date": "2027-03-08",
+    "title": "Somavati Amavasya",
+    "icon": "🌑",
+    "desc": "Rare Amavasya falling on Monday."
+  },
+  {
+    "date": "2027-03-18",
+    "title": "Amalaki Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi dedicated to Lord Vishnu."
+  },
+  {
+    "date": "2027-03-21",
+    "title": "Holika Dahan",
+    "icon": "🔥",
+    "desc": "Bonfire symbolizing the victory of good over evil."
+  },
+  {
+    "date": "2027-03-22",
+    "title": "Holi",
+    "icon": "🎨",
+    "desc": "Festival of colours."
+  },
+  {
+    "date": "2027-03-30",
+    "title": "Sheetala Ashtami",
+    "icon": "🌸",
+    "desc": "Festival dedicated to Goddess Sheetala."
+  },
+  {
+    "date": "2027-04-02",
+    "title": "Papamochani Ekadashi",
+    "icon": "🪔",
+    "desc": "Ekadashi believed to remove sins."
+  },
+  {
+    "date": "2027-04-07",
+    "title": "Ugadi",
+    "icon": "🎉",
+    "desc": "Hindu New Year celebrated in many regions."
+  },
+  {
+    "date": "2027-04-07",
+    "title": "Gudi Padwa",
+    "icon": "🚩",
+    "desc": "Maharashtrian New Year."
+  },
+  {
+    "date": "2027-04-07",
+    "title": "Chaitra Navratri Begins",
+    "icon": "🌺",
+    "desc": "Beginning of the nine-day worship of Goddess Durga."
+  },
+  {
+    "date": "2027-04-09",
+    "title": "Gangaur",
+    "icon": "🌼",
+    "desc": "Festival dedicated to Goddess Gauri."
+  },
+  {
+    "date": "2027-04-14",
+    "title": "Mesha Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Mesha (Aries)."
+  },
+  {
+    "date": "2027-04-15",
+    "title": "Rama Navami",
+    "icon": "🏹",
+    "desc": "Birth anniversary of Lord Rama."
+  },
+  {
+    "date": "2027-04-17",
+    "title": "Kamada Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi of Chaitra month."
+  },
+  {
+    "date": "2027-04-20",
+    "title": "Hanuman Jayanti",
+    "icon": "🐒",
+    "desc": "Birth anniversary of Lord Hanuman."
+  },
+  {
+    "date": "2027-04-20",
+    "title": "Chaitra Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Chaitra month."
+  },
+  {
+    "date": "2027-05-02",
+    "title": "Varuthini Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi dedicated to Lord Vishnu."
+  },
+  {
+    "date": "2027-05-08",
+    "title": "Parashurama Jayanti",
+    "icon": "🪓",
+    "desc": "Birth anniversary of Lord Parashurama."
+  },
+  {
+    "date": "2027-05-09",
+    "title": "Akshaya Tritiya",
+    "icon": "✨",
+    "desc": "Highly auspicious day for charity, worship and new beginnings."
+  },
+  {
+    "date": "2027-05-12",
+    "title": "Ganga Saptami",
+    "icon": "🌊",
+    "desc": "Festival dedicated to Goddess Ganga."
+  },
+  {
+    "date": "2027-05-14",
+    "title": "Sita Navami",
+    "icon": "🌸",
+    "desc": "Birth anniversary of Goddess Sita."
+  },
+  {
+    "date": "2027-05-15",
+    "title": "Vrishabha Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Taurus (Vrishabha)."
+  },
+  {
+    "date": "2027-05-16",
+    "title": "Mohini Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi of Vaishakha month."
+  },
+  {
+    "date": "2027-05-18",
+    "title": "Narasimha Jayanti",
+    "icon": "🦁",
+    "desc": "Birth anniversary of Lord Narasimha."
+  },
+  {
+    "date": "2027-05-20",
+    "title": "Buddha Purnima",
+    "icon": "🌕",
+    "desc": "Celebration of Lord Buddha's birth."
+  },
+  {
+    "date": "2027-05-21",
+    "title": "Narada Jayanti",
+    "icon": "🎼",
+    "desc": "Birth anniversary of Devarshi Narada."
+  },
+  {
+    "date": "2027-06-01",
+    "title": "Apara Ekadashi",
+    "icon": "🪔",
+    "desc": "Ekadashi observed during Jyeshtha month."
+  },
+  {
+    "date": "2027-06-04",
+    "title": "Vat Savitri Vrat",
+    "icon": "🌳",
+    "desc": "Sacred fast observed by married women."
+  },
+  {
+    "date": "2027-06-04",
+    "title": "Shani Jayanti",
+    "icon": "🪐",
+    "desc": "Birth anniversary of Lord Shani."
+  },
+  {
+    "date": "2027-06-13",
+    "title": "Ganga Dussehra",
+    "icon": "🌊",
+    "desc": "Celebration of the descent of River Ganga."
+  },
+  {
+    "date": "2027-06-14",
+    "title": "Nirjala Ekadashi",
+    "icon": "🪔",
+    "desc": "One of the most important Ekadashis."
+  },
+  {
+    "date": "2027-06-15",
+    "title": "Mithuna Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Gemini (Mithuna)."
+  },
+  {
+    "date": "2027-06-18",
+    "title": "Vat Purnima",
+    "icon": "🌕",
+    "desc": "Sacred Purnima observed with Vat Vriksha worship."
+  },
+  {
+    "date": "2027-06-30",
+    "title": "Yogini Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi of Ashadha Krishna Paksha."
+  },
+  {
+    "date": "2027-07-05",
+    "title": "Jagannath Rath Yatra",
+    "icon": "🚩",
+    "desc": "Grand chariot festival of Lord Jagannath."
+  },
+  {
+    "date": "2027-07-14",
+    "title": "Devshayani Ekadashi",
+    "icon": "🪔",
+    "desc": "Marks the beginning of Chaturmas."
+  },
+  {
+    "date": "2027-07-16",
+    "title": "Karka Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Cancer (Karka)."
+  },
+  {
+    "date": "2027-07-18",
+    "title": "Guru Purnima",
+    "icon": "🙏",
+    "desc": "Day to honor Gurus and spiritual teachers."
+  },
+  {
+    "date": "2027-07-29",
+    "title": "Kamika Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi during Shravana month."
+  },
+  {
+    "date": "2027-08-02",
+    "title": "Somavati Amavasya",
+    "icon": "🌑",
+    "desc": "Amavasya falling on Monday."
+  },
+  {
+    "date": "2027-08-04",
+    "title": "Hariyali Teej",
+    "icon": "🌿",
+    "desc": "Festival dedicated to Goddess Parvati."
+  },
+  {
+    "date": "2027-08-06",
+    "title": "Nag Panchami",
+    "icon": "🐍",
+    "desc": "Traditional worship of Nag Devta."
+  },
+  {
+    "date": "2027-08-12",
+    "title": "Shravana Putrada Ekadashi",
+    "icon": "🪔",
+    "desc": "Ekadashi observed for blessings of children."
+  },
+  {
+    "date": "2027-08-13",
+    "title": "Varalakshmi Vrat",
+    "icon": "🪷",
+    "desc": "Sacred fast dedicated to Goddess Lakshmi."
+  },
+  {
+    "date": "2027-08-17",
+    "title": "Raksha Bandhan",
+    "icon": "🪢",
+    "desc": "Festival celebrating the bond of brothers and sisters."
+  },
+  {
+    "date": "2027-08-17",
+    "title": "Gayatri Jayanti",
+    "icon": "📿",
+    "desc": "Celebration dedicated to Goddess Gayatri."
+  },
+  {
+    "date": "2027-08-17",
+    "title": "Shravana Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Shravana month."
+  },
+  {
+    "date": "2027-08-17",
+    "title": "Simha Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Leo (Simha)."
+  },
+  {
+    "date": "2027-08-20",
+    "title": "Kajari Teej",
+    "icon": "🌿",
+    "desc": "Traditional Teej festival observed during Bhadrapada."
+  },
+  {
+    "date": "2027-08-25",
+    "title": "Krishna Janmashtami",
+    "icon": "🦚",
+    "desc": "Birth anniversary of Lord Krishna."
+  },
+  {
+    "date": "2027-08-28",
+    "title": "Aja Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi of Bhadrapada Krishna Paksha."
+  },
+  {
+    "date": "2027-09-03",
+    "title": "Hartalika Teej",
+    "icon": "🌿",
+    "desc": "Sacred fast dedicated to Goddess Parvati."
+  },
+  {
+    "date": "2027-09-04",
+    "title": "Ganesh Chaturthi",
+    "icon": "🐘",
+    "desc": "Birth anniversary of Lord Ganesha."
+  },
+  {
+    "date": "2027-09-04",
+    "title": "Rishi Panchami",
+    "icon": "🙏",
+    "desc": "Sacred day dedicated to Saptarishis."
+  },
+  {
+    "date": "2027-09-05",
+    "title": "Balarama Jayanti",
+    "icon": "🦚",
+    "desc": "Birth anniversary of Lord Balarama."
+  },
+  {
+    "date": "2027-09-08",
+    "title": "Radha Ashtami",
+    "icon": "🌸",
+    "desc": "Birth anniversary of Shri Radha Rani."
+  },
+  {
+    "date": "2027-09-11",
+    "title": "Parsva Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi during Bhadrapada Shukla Paksha."
+  },
+  {
+    "date": "2027-09-14",
+    "title": "Anant Chaturdashi",
+    "icon": "🪢",
+    "desc": "Festival dedicated to Lord Vishnu in Ananta form."
+  },
+  {
+    "date": "2027-09-14",
+    "title": "Ganesh Visarjan",
+    "icon": "🌊",
+    "desc": "Visarjan ceremony of Lord Ganesha."
+  },
+  {
+    "date": "2027-09-15",
+    "title": "Bhadrapada Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Bhadrapada month."
+  },
+  {
+    "date": "2027-09-16",
+    "title": "Pitru Paksha Begins",
+    "icon": "🕯️",
+    "desc": "Fortnight dedicated to ancestors."
+  },
+  {
+    "date": "2027-09-17",
+    "title": "Vishwakarma Puja",
+    "icon": "🛠️",
+    "desc": "Worship of Lord Vishwakarma."
+  },
+  {
+    "date": "2027-09-17",
+    "title": "Kanya Sankranti",
+    "icon": "☀️",
+    "desc": "Sun enters Virgo (Kanya)."
+  },
+  {
+    "date": "2027-09-26",
+    "title": "Indira Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi observed during Pitru Paksha."
+  },
+  {
+    "date": "2027-09-29",
+    "title": "Sarva Pitru Amavasya",
+    "icon": "🌑",
+    "desc": "Final day of Pitru Paksha."
+  },
+  {
+    "date": "2027-09-30",
+    "title": "Sharad Navratri Begins",
+    "icon": "🌺",
+    "desc": "Beginning of the nine-day worship of Goddess Durga."
+  },
+  {
+    "date": "2027-10-07",
+    "title": "Durga Ashtami",
+    "icon": "🪷",
+    "desc": "One of the holiest days of Navratri."
+  },
+  {
+    "date": "2027-10-08",
+    "title": "Maha Navami",
+    "icon": "🙏",
+    "desc": "Ninth day of Navratri."
+  },
+  {
+    "date": "2027-10-09",
+    "title": "Vijayadashami (Dussehra)",
+    "icon": "🏹",
+    "desc": "Victory of good over evil."
+  },
+  {
+    "date": "2027-10-15",
+    "title": "Sharad Purnima",
+    "icon": "🌕",
+    "desc": "Sacred harvest full moon."
+  },
+  {
+    "date": "2027-10-15",
+    "title": "Valmiki Jayanti",
+    "icon": "📖",
+    "desc": "Birth anniversary of Maharishi Valmiki."
+  },
+  {
+    "date": "2027-10-18",
+    "title": "Karwa Chauth",
+    "icon": "🌙",
+    "desc": "Sacred fast observed by married women."
+  },
+  {
+    "date": "2027-10-26",
+    "title": "Rama Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi of Kartik Krishna Paksha."
+  },
+  {
+    "date": "2027-10-28",
+    "title": "Dhanteras",
+    "icon": "🪙",
+    "desc": "Beginning of the Diwali festival."
+  },
+  {
+    "date": "2027-10-28",
+    "title": "Naraka Chaturdashi",
+    "icon": "🪔",
+    "desc": "Chhoti Diwali."
+  },
+  {
+    "date": "2027-10-29",
+    "title": "Diwali",
+    "icon": "🪔",
+    "desc": "Festival of Lights."
+  },
+  {
+    "date": "2027-10-30",
+    "title": "Govardhan Puja",
+    "icon": "⛰️",
+    "desc": "Worship of Govardhan Hill."
+  },
+  {
+    "date": "2027-10-31",
+    "title": "Bhai Dooj",
+    "icon": "👫",
+    "desc": "Celebration of the bond between brothers and sisters."
+  },
+  {
+    "date": "2027-11-09",
+    "title": "Devutthana Ekadashi",
+    "icon": "🪔",
+    "desc": "Marks the end of Chaturmas."
+  },
+  {
+    "date": "2027-11-10",
+    "title": "Tulsi Vivah",
+    "icon": "🌿",
+    "desc": "Ceremonial marriage of Tulsi and Lord Vishnu."
+  },
+  {
+    "date": "2027-11-13",
+    "title": "Chhath Puja",
+    "icon": "🌞",
+    "desc": "Devotional worship of Surya Dev."
+  },
+  {
+    "date": "2027-11-14",
+    "title": "Chhath Paran",
+    "icon": "🌅",
+    "desc": "Conclusion of Chhath festival."
+  },
+  {
+    "date": "2027-11-24",
+    "title": "Kartik Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Kartik month."
+  },
+  {
+    "date": "2027-12-09",
+    "title": "Utpanna Ekadashi",
+    "icon": "🪔",
+    "desc": "Sacred Ekadashi of Margashirsha Krishna Paksha."
+  },
+  {
+    "date": "2027-12-16",
+    "title": "Mokshada Ekadashi",
+    "icon": "🪔",
+    "desc": "Ekadashi associated with the Bhagavad Gita."
+  },
+  {
+    "date": "2027-12-16",
+    "title": "Gita Jayanti",
+    "icon": "📖",
+    "desc": "Celebration of the Bhagavad Gita."
+  },
+  {
+    "date": "2027-12-24",
+    "title": "Margashirsha Purnima",
+    "icon": "🌕",
+    "desc": "Holy full moon of Margashirsha month."
+  }
+]
