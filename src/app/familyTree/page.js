@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import { FiChevronDown } from "react-icons/fi";
 import familyData from "@/data/family-tree.json";
 
 /* ============================================================
@@ -330,11 +331,11 @@ export default function FamilyTreePage() {
                     </span>
                   </div>
                   <div
-                    className={`w-7 h-7 rounded-full bg-amber-100 text-red-800 flex items-center justify-center text-xs transition-transform print:hidden ${
+                    className={`w-8 h-8 rounded-full bg-amber-100 text-red-800 flex items-center justify-center transition-transform duration-300 print:hidden ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   >
-                    ▾
+                    <FiChevronDown size={25} />
                   </div>
                 </button>
 
