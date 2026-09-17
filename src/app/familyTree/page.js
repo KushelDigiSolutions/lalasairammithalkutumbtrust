@@ -1,8 +1,12 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
-import { FiChevronDown } from "react-icons/fi";
+import { useMemo, useState, useEffect, useRef } from "react";
 import familyData from "@/data/family-tree.json";
+
+const NUMBER_WORDS = [
+  "Zero", "One", "Two", "Three", "Four", "Five",
+  "Six", "Seven", "Eight", "Nine", "Ten",
+];
 
 /* ============================================================
    Build a flat, indexed version of the tree once:
@@ -51,53 +55,18 @@ export default function FamilyTreePage() {
     []
   );
 
-  const [expandedIds, setExpandedIds] = useState(new Set());
-  const [openBranches, setOpenBranches] = useState(new Set());
+  const [activeBranchId, setActiveBranchId] = useState(
+    branches[0]?._id ?? null
+  );
   const [query, setQuery] = useState("");
   const [highlightId, setHighlightId] = useState(null);
   const [scrollTargetId, setScrollTargetId] = useState(null);
-  const [allExpanded, setAllExpanded] = useState(false);
+  const [treeOverflows, setTreeOverflows] = useState(false);
+  const treeScrollRef = useRef(null);
 
   const totalMembers = allPeople.length + 1; // +1 for the patriarch
 
-  const toggleExpand = (id) => {
-    setExpandedIds((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  };
-
-  const toggleBranch = (id) => {
-    setOpenBranches((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  };
-
-  const handleExpandAll = () => {
-    const next = !allExpanded;
-    setAllExpanded(next);
-    if (next) {
-      setOpenBranches(new Set(branches.map((b) => b._id)));
-      setExpandedIds(new Set(allPeople.filter((p) => p.children?.length).map((p) => p._id)));
-    } else {
-      setOpenBranches(new Set());
-      setExpandedIds(new Set());
-    }
-  };
-
-  // Expands the whole tree, then opens the print dialog once the
-  // re-render has happened, so the printed page shows everything.
-  const handlePrint = () => {
-    setAllExpanded(true);
-    setOpenBranches(new Set(branches.map((b) => b._id)));
-    setExpandedIds(
-      new Set(allPeople.filter((p) => p.children?.length).map((p) => p._id))
-    );
-    setTimeout(() => window.print(), 150);
-  };
+  const handlePrint = () => window.print();
 
   const searchResults = useMemo(() => {
     if (query.trim().length < 2) return [];
@@ -106,21 +75,11 @@ export default function FamilyTreePage() {
   }, [query, allPeople]);
 
   const goToPerson = (person) => {
-    // open the branch this person belongs to
+    // switch to the branch tab this person belongs to — the whole
+    // branch is always shown in full, so no expanding is needed
     let node = person;
     while (node._parentId !== "root") node = idToNode.get(node._parentId);
-    setOpenBranches((prev) => new Set(prev).add(node._id));
-
-    // expand every ancestor along the way so the row is visible
-    setExpandedIds((prev) => {
-      const next = new Set(prev);
-      let n = person;
-      while (n._parentId && n._parentId !== "root") {
-        next.add(n._parentId);
-        n = idToNode.get(n._parentId);
-      }
-      return next;
-    });
+    setActiveBranchId(node._id);
 
     setQuery(person.name);
     setScrollTargetId(person._id);
@@ -144,51 +103,86 @@ export default function FamilyTreePage() {
     return () => clearTimeout(t);
   }, [highlightId]);
 
-  function PersonNode({ node }) {
-    const hasKids = node.children && node.children.length > 0;
-    const isOpen = expandedIds.has(node._id);
-    const isMatched = highlightId === node._id;
+  // A branch's chart can be wider than the screen on any device, not
+  // just phones — so instead of a fixed breakpoint, measure the actual
+  // scroll container: center it on first render (the root box sits in
+  // the middle of the full width, so centering brings it into view
+  // without a manual scroll) and show the "scroll for more" hint only
+  // when the chart genuinely doesn't fit.
+  useEffect(() => {
+    const el = treeScrollRef.current;
+    if (!el) {
+      setTreeOverflows(false);
+      return;
+    }
+
+    const measure = () => {
+      setTreeOverflows(el.scrollWidth > el.clientWidth + 1);
+    };
+
+    el.scrollLeft = Math.max(0, (el.scrollWidth - el.clientWidth) / 2);
+    measure();
+
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [activeBranchId]);
+
+  // Org-chart style box — a person's box, connected by lines to their
+  // children's boxes laid out in a row beneath them, the same shape as
+  // a company org chart / a hand-drawn family tree. Used both on screen
+  // and (via printMode, which just drops the DOM id so it doesn't clash
+  // with the on-screen copy) in the printed PDF, so the two always look
+  // like the same design.
+  function TreeNode({ node, tier, printMode }) {
+    const childCount = node.children ? node.children.length : 0;
+    const hasKids = childCount > 0;
+    const isMatched = !printMode && highlightId === node._id;
+    const cappedTier = Math.min(tier, 3);
+
+    const nameClass =
+      cappedTier === 1
+        ? "font-serif font-bold text-red-900 text-sm md:text-base"
+        : cappedTier === 2
+        ? "font-semibold text-gray-800 text-xs md:text-sm"
+        : "font-medium text-gray-700 text-xs";
+
+    const boxClass =
+      cappedTier === 1
+        ? "bg-white border-amber-300 shadow-md"
+        : cappedTier === 2
+        ? "bg-white border-amber-200 shadow-sm"
+        : "bg-amber-50/70 border-amber-100";
 
     return (
-      <li id={node._id} className="relative pl-5 py-2 before:content-[''] before:absolute before:left-0 before:top-[22px] before:w-4 before:h-0.5 before:bg-amber-100">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] font-extrabold tracking-wide text-amber-600 bg-amber-50 rounded px-1.5 py-0.5">
-            G{node._depth}
-          </span>
-          <span
-            className={`text-sm font-semibold text-gray-800 rounded px-1 transition-all ${
-              isMatched ? "bg-amber-200 ring-2 ring-amber-400" : ""
-            }`}
-          >
-            {node.name}
-          </span>
+      <li>
+        <div
+          id={printMode ? undefined : node._id}
+          className={`node-box inline-flex flex-col items-center gap-1 rounded-lg border ${boxClass} px-2 py-1.5 sm:px-3 sm:py-2 min-w-[68px] sm:min-w-[88px] transition-all ${
+            isMatched ? "ring-2 ring-amber-400" : ""
+          }`}
+        >
+          <span className={`${nameClass} text-center leading-tight`}>{node.name}</span>
           {hasKids && (
-            <>
-              <span className="text-[11px] text-gray-400">
-                ({countDescendants(node)})
-              </span>
-              <button
-                onClick={() => toggleExpand(node._id)}
-                className="text-[11px] font-bold text-amber-600 hover:underline ml-0.5 print:hidden"
-              >
-                {isOpen ? "hide family" : "show family"}
-              </button>
-            </>
+            <span className="text-[8px] sm:text-[9px] font-bold text-amber-700 bg-amber-100 rounded-full px-1.5 sm:px-2 py-0.5 whitespace-nowrap">
+              {childCount} {childCount === 1 ? "child" : "children"}
+            </span>
           )}
         </div>
 
         {hasKids && (
-          <div className={isOpen ? "block" : "hidden print:block"}>
-            <ul className="list-none m-0 mt-1 pl-5 border-l-2 border-amber-100">
-              {node.children.map((child) => (
-                <PersonNode key={child._id} node={child} />
-              ))}
-            </ul>
-          </div>
+          <ul>
+            {node.children.map((child) => (
+              <TreeNode key={child._id} node={child} tier={tier + 1} printMode={printMode} />
+            ))}
+          </ul>
         )}
       </li>
     );
   }
+
+  const activeIndex = branches.findIndex((b) => b._id === activeBranchId);
+  const activeBranch = activeIndex >= 0 ? branches[activeIndex] : branches[0];
+  const branchesWord = NUMBER_WORDS[branches.length] || branches.length;
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAF8] w-full">
@@ -207,148 +201,255 @@ export default function FamilyTreePage() {
         </p>
       </section>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        {/* Patriarch card */}
-        <div className="relative z-10 -mt-16 bg-white rounded-3xl shadow-xl border border-amber-100 p-8 md:p-10 text-center print:hidden">
-          <span className="text-5xl inline-block mb-4">🪔</span>
-          <h2 className="font-serif text-2xl font-bold text-red-800 mb-1">
-            {familyData.name} Ji
-          </h2>
-          <p className="text-gray-500 text-sm mb-6">
-            Kul Purush · Founder of the family line
-          </p>
-          <div className="flex justify-center gap-10 flex-wrap">
-            <div className="text-center">
-              <div className="font-serif text-2xl font-bold text-red-800">
-                {totalMembers}
-              </div>
-              <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
-                Members Recorded
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="font-serif text-2xl font-bold text-red-800">
-                {Math.max(...allPeople.map((p) => p._depth)) + 1}
-              </div>
-              <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
-                Generations
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="font-serif text-2xl font-bold text-red-800">
-                {branches.length}
-              </div>
-              <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
-                Family Branches
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Print-only title (screen uses the hero above instead) */}
+      <div className="hidden print:block text-center mb-6">
+        <h1 className="font-serif text-2xl font-bold text-gray-900">
+          {familyData.name} Ji — Family Lineage
+        </h1>
+      </div>
 
-        {/* Search */}
-        <div className="relative mt-10 print:hidden">
-          <svg
-            className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for a family member by name…"
-            className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-amber-100 bg-white text-sm shadow-sm outline-none focus:border-amber-400"
-          />
-          {searchResults.length > 0 && (
-            <div className="absolute left-0 right-0 mt-2 bg-white rounded-2xl border border-amber-100 shadow-lg overflow-hidden z-20">
-              {searchResults.map((p) => (
-                <button
-                  key={p._id}
-                  onClick={() => goToPerson(p)}
-                  className="w-full text-left px-5 py-3 border-b border-amber-50 last:border-b-0 hover:bg-amber-50"
-                >
-                  <div className="text-sm font-bold text-red-800">{p.name}</div>
-                  <div className="text-[11px] text-gray-400">
-                    {p._path.join(" → ")}
-                  </div>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Section head */}
-        <div className="text-center mt-14 mb-8 print:hidden">
-          <h3 className="font-serif text-2xl md:text-3xl font-bold text-red-800 mb-3">
-            The Five Branches
-          </h3>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full" />
-          <div className="flex justify-center gap-3 mt-6 flex-wrap print:hidden">
-            <button
-              onClick={handleExpandAll}
-              className="bg-red-800 hover:bg-red-900 text-white text-xs font-bold px-5 py-2 rounded-full transition-colors"
-            >
-              {allExpanded ? "Collapse All" : "Expand All"}
-            </button>
-            <button
-              onClick={handlePrint}
-              className="border border-amber-200 text-red-800 hover:bg-amber-50 text-xs font-bold px-5 py-2 rounded-full transition-colors"
-            >
-              Print / Save as PDF
-            </button>
-          </div>
-        </div>
-
-        {/* Branch cards */}
-        <div className="pb-16">
-          {branches.map((branch, i) => {
-            const isOpen = openBranches.has(branch._id);
-            return (
-              <div
-                key={branch._id}
-                className="bg-white rounded-3xl border border-amber-100 shadow-md mb-4 overflow-hidden print:shadow-none print:border-gray-300 print:break-inside-avoid"
-              >
-                <button
-                  onClick={() => toggleBranch(branch._id)}
-                  className="w-full flex items-center gap-4 p-5 md:p-6 text-left hover:bg-amber-50/50 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-full bg-red-800 text-white font-serif font-bold flex items-center justify-center flex-shrink-0">
-                    {i + 1}
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-serif text-lg font-bold text-red-800">
-                      {branch.name}
-                    </h4>
-                    <span className="text-xs text-gray-500">
-                      {countDescendants(branch)} descendants recorded
-                    </span>
-                  </div>
-                  <div
-                    className={`w-8 h-8 rounded-full bg-amber-100 text-red-800 flex items-center justify-center transition-transform duration-300 print:hidden ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  >
-                    <FiChevronDown size={25} />
-                  </div>
-                </button>
-
-                <div className={`px-5 md:px-6 pb-6 ${isOpen ? "block" : "hidden print:block"}`}>
-                  <ul className="list-none m-0">
-                    {(branch.children || []).map((child) => (
-                      <PersonNode key={child._id} node={child} />
-                    ))}
-                  </ul>
+      {/* Same max-w-7xl frame as the navbar and the rest of the site, so
+          the tree's left/right edges line up with the logo and the
+          Donate button all the way down the page. */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Narrower inner column for the reading-heavy intro bits */}
+        <div className="max-w-4xl mx-auto w-full">
+          {/* Patriarch card */}
+          <div className="relative z-10 -mt-16 bg-white rounded-3xl shadow-xl border border-amber-100 p-8 md:p-10 text-center print:hidden">
+            <span className="text-5xl inline-block mb-4">🪔</span>
+            <h2 className="font-serif text-2xl font-bold text-red-800 mb-1">
+              {familyData.name} Ji
+            </h2>
+            <p className="text-gray-500 text-sm mb-6">
+              Kul Purush · Founder of the family line
+            </p>
+            <div className="flex justify-center gap-10 flex-wrap">
+              <div className="text-center">
+                <div className="font-serif text-2xl font-bold text-red-800">
+                  {totalMembers}
+                </div>
+                <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
+                  Members Recorded
                 </div>
               </div>
+              <div className="text-center">
+                <div className="font-serif text-2xl font-bold text-red-800">
+                  {Math.max(...allPeople.map((p) => p._depth)) + 1}
+                </div>
+                <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
+                  Generations
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="font-serif text-2xl font-bold text-red-800">
+                  {branches.length}
+                </div>
+                <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold">
+                  Family Branches
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Search */}
+          <div className="relative mt-10 print:hidden">
+            <svg
+              className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search for a family member by name…"
+              className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-amber-100 bg-white text-sm shadow-sm outline-none focus:border-amber-400"
+            />
+            {searchResults.length > 0 && (
+              <div className="absolute left-0 right-0 mt-2 bg-white rounded-2xl border border-amber-100 shadow-lg overflow-hidden z-20">
+                {searchResults.map((p) => (
+                  <button
+                    key={p._id}
+                    onClick={() => goToPerson(p)}
+                    className="w-full text-left px-5 py-3 border-b border-amber-50 last:border-b-0 hover:bg-amber-50"
+                  >
+                    <div className="text-sm font-bold text-red-800">{p.name}</div>
+                    <div className="text-[11px] text-gray-400">
+                      {p._path.join(" → ")}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Section head */}
+          <div className="text-center mt-14 mb-8 print:hidden">
+            <span className="inline-block text-amber-600 text-xs font-bold tracking-[3px] uppercase mb-3">
+              Explore by lineage
+            </span>
+            <h3 className="font-serif text-2xl md:text-3xl font-bold text-red-800 mb-3">
+              The {branchesWord} Branches
+            </h3>
+            <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full mb-4" />
+            <p className="text-gray-500 text-sm max-w-md mx-auto">
+              Tap a branch below to see everyone in it, listed together from
+              parent down to the youngest child.
+            </p>
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={handlePrint}
+                className="border border-amber-200 text-red-800 hover:bg-amber-50 text-xs font-bold px-5 py-2 rounded-full transition-colors"
+              >
+                Print / Save as PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Branch tabs — numbered, mutually exclusive */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 print:hidden" role="tablist" aria-label="Family branches">
+          {branches.map((branch, i) => {
+            const isActive = branch._id === activeBranchId;
+            return (
+              <button
+                key={branch._id}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveBranchId(branch._id)}
+                className={`group relative flex flex-col items-center gap-2 rounded-2xl border p-4 md:p-5 text-center transition-all duration-300 ${
+                  isActive
+                    ? "bg-gradient-to-b from-red-800 to-red-950 border-red-900 shadow-lg shadow-red-900/25 -translate-y-0.5"
+                    : "bg-white border-amber-100 hover:border-amber-300 hover:bg-amber-50/60"
+                }`}
+              >
+                <span
+                  className={`w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center font-serif font-bold text-base transition-colors ${
+                    isActive
+                      ? "bg-white text-red-800"
+                      : "bg-amber-50 text-red-800 group-hover:bg-amber-100"
+                  }`}
+                >
+                  {i + 1}
+                </span>
+                <span
+                  className={`font-serif font-bold text-xs sm:text-sm leading-tight line-clamp-2 ${
+                    isActive ? "text-white" : "text-red-800"
+                  }`}
+                >
+                  {branch.name}
+                </span>
+                <span
+                  className={`text-[10px] sm:text-[11px] ${
+                    isActive ? "text-amber-200" : "text-gray-400"
+                  }`}
+                >
+                  {countDescendants(branch)} members
+                </span>
+              </button>
             );
           })}
+        </div>
+
+        {/* Active branch panel — only the selected branch is shown, in full */}
+        {activeBranch && (
+          <div
+            key={activeBranch._id}
+            className="branch-fade bg-white rounded-3xl border border-amber-100 shadow-md mt-5 mb-4 p-5 md:p-8 print:hidden"
+          >
+            <div className="flex items-center gap-4 mb-6 pb-5 border-b border-amber-50">
+              <div className="w-12 h-12 rounded-full bg-red-800 text-white font-serif font-bold flex items-center justify-center flex-shrink-0 text-lg">
+                {activeIndex + 1}
+              </div>
+              <div>
+                <span className="text-[11px] uppercase tracking-wider text-amber-600 font-bold">
+                  Branch {activeIndex + 1} of {branches.length}
+                </span>
+                <h4 className="font-serif text-xl md:text-2xl font-bold text-red-800">
+                  {activeBranch.name}
+                </h4>
+                <span className="text-xs text-gray-500">
+                  {countDescendants(activeBranch)} members recorded
+                </span>
+              </div>
+            </div>
+
+            {activeBranch.children && activeBranch.children.length > 0 ? (
+              <>
+                <div
+                  ref={treeScrollRef}
+                  className="overflow-x-auto overflow-y-hidden pb-4 -mx-5 md:-mx-8 px-5 md:px-8"
+                >
+                  {/* the branch number is the root of the chart — one line
+                      feeds down from it into the fan-out of children */}
+                  <ul className="org-tree mx-auto">
+                    <li>
+                      <div className="node-box inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-800 text-white font-serif font-bold text-sm flex-shrink-0">
+                        {activeIndex + 1}
+                      </div>
+                      <ul>
+                        {activeBranch.children.map((child) => (
+                          <TreeNode key={child._id} node={child} tier={1} />
+                        ))}
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                {treeOverflows && (
+                  <p className="text-center text-[11px] text-gray-400 mt-1">
+                    ← Scroll sideways to see the full tree →
+                  </p>
+                )}
+              </>
+            ) : (
+              <p className="text-sm text-gray-400 italic">
+                No members recorded yet for this branch.
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Print-only layout — every branch, in the same org-chart look
+            as the screen, just scaled to fit a landscape page (see the
+            @media print rules in globals.css) */}
+        <div className="hidden print:block pb-10">
+          {branches.map((branch, i) => (
+            <div key={branch._id} className="mb-10 break-inside-avoid">
+              <h4 className="font-serif text-base font-bold text-gray-900 border-b border-gray-300 pb-2 mb-4">
+                Branch {i + 1}: {branch.name}{" "}
+                <span className="text-xs font-normal text-gray-500">
+                  ({countDescendants(branch)} members)
+                </span>
+              </h4>
+              {branch.children && branch.children.length > 0 ? (
+                <div className="print-tree flex justify-center">
+                  <ul className="org-tree">
+                    <li>
+                      <div className="node-box inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-800 text-white font-serif font-bold text-sm flex-shrink-0">
+                        {i + 1}
+                      </div>
+                      <ul>
+                        {branch.children.map((child) => (
+                          <TreeNode key={child._id} node={child} tier={1} printMode />
+                        ))}
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <p className="text-sm text-gray-400 italic">
+                  No members recorded yet for this branch.
+                </p>
+              )}
+            </div>
+          ))}
         </div>
 
         <p className="text-center text-gray-400 text-xs pb-16 print:hidden">

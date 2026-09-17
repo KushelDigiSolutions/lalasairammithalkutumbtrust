@@ -20,3 +20,151 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
 }
+
+@keyframes branchFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.branch-fade {
+  animation: branchFadeIn 0.4s ease;
+}
+
+/* ============================================================
+   Org-chart style connector lines for the Family Tree page.
+   One box on top, a line down, a bar that fans out, then a line
+   down into each child box — the classic family-tree/org-chart
+   look, drawn with plain CSS (no images, no JS).
+   ============================================================ */
+.org-tree,
+.org-tree ul,
+.org-tree li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.org-tree {
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.org-tree ul {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 28px;
+}
+
+.org-tree li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 14px 0 14px;
+  position: relative;
+}
+
+/* Tighter spacing on small screens — less side padding per box and a
+   shorter connector segment keeps a wide, many-generation branch from
+   turning into an oversized, mostly-empty chart on a phone screen. */
+@media (max-width: 639px) {
+  .org-tree ul {
+    padding-top: 20px;
+  }
+  .org-tree li {
+    padding: 20px 6px 0 6px;
+  }
+  .org-tree li::before,
+  .org-tree li::after {
+    height: 20px;
+  }
+  .org-tree ul::before {
+    height: 20px;
+  }
+}
+
+.org-tree li::before,
+.org-tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 28px;
+  border-top: 2px solid #FCD34D;
+}
+
+.org-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid #FCD34D;
+}
+
+.org-tree li:only-child::before,
+.org-tree li:only-child::after {
+  display: none;
+}
+
+.org-tree li:first-child::before,
+.org-tree li:last-child::after {
+  border: none;
+}
+
+.org-tree li:last-child::before {
+  border-right: 2px solid #FCD34D;
+  border-radius: 0 6px 0 0;
+}
+
+.org-tree li:first-child::after {
+  border-radius: 6px 0 0 0;
+}
+
+/* the line feeding down from a box into the row of its own children —
+   applies to every nested row, including the very first one right
+   under the branch's root number, so a single-child branch still
+   shows an unbroken line instead of a floating gap */
+.org-tree ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 28px;
+  border-left: 2px solid #FCD34D;
+}
+
+/* ============================================================
+   Print / "Save as PDF" — the PDF should look like the website,
+   not a plain fallback list. Landscape gives the wide org-chart
+   room to breathe, `zoom` shrinks it to fit a page without
+   clipping anything, and print-color-adjust keeps the maroon/
+   amber colours instead of the browser flattening them to plain
+   black and white.
+   ============================================================ */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+
+  /* Measured against the widest branch (the ten-child row under
+     "Late. Ramanand Gupta", ~2314px at full size) against an A4
+     landscape page's printable width (~1047px after 10mm margins),
+     with some safety margin so nothing touches the page edge. */
+  .print-tree {
+    zoom: 0.4;
+  }
+}
