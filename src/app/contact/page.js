@@ -57,7 +57,7 @@ export default function Contact() {
                 <span className="text-xl md:text-2xl text-saffron">📞</span>
                 <div>
                   <h3 className="font-bold text-gray-800 text-sm md:text-base">Phone</h3>
-                  <a href="tel:+919876543210" className="text-gray-600 mt-1 text-sm md:text-base">+91 9897973446</a>
+                  <a href="tel:+919897973446" className="text-gray-600 mt-1 text-sm md:text-base">+91 9897973446</a>
                 </div>
               </div>
               <div className="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
