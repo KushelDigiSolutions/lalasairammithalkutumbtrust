@@ -24,16 +24,50 @@ body {
 @keyframes branchFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .branch-fade {
-  animation: branchFadeIn 0.4s ease;
+  animation: branchFadeIn 0.3s ease;
+}
+
+/* ============================================================
+   Custom scrollbars for Family Tree horizontal navigation
+   ============================================================ */
+.tree-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #991b1b #fef3c7;
+}
+
+.tree-scrollbar::-webkit-scrollbar {
+  height: 10px;
+}
+
+.tree-scrollbar::-webkit-scrollbar-track {
+  background: #fef3c7;
+  border-radius: 9999px;
+}
+
+.tree-scrollbar::-webkit-scrollbar-thumb {
+  background: #991b1b;
+  border-radius: 9999px;
+  border: 2px solid #fef3c7;
+}
+
+.tree-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #7f1d1d;
+}
+
+/* Hide scrollbar utility for the main tree canvas */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* ============================================================

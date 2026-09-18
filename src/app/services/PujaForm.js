@@ -25,8 +25,7 @@ export default function PujaForm() {
     const text = `🙏 *Jai Lala Sai Ram*\n\n*Puja Booking Request*\n\n*Puja Type:* ${formData.pujaType}\n*Preferred Date:* ${formData.date}\n*Phone Number:* ${formData.phone}\n*Special Requirements:*\n${formData.notes || 'None'}`;
     const encodedText = encodeURIComponent(text);
     
-    // Replace with the actual WhatsApp number
-    window.open(`https://wa.me/919876543210?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/919897973446?text=${encodedText}`, '_blank');
   };
 
   return (
