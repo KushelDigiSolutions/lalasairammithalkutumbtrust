@@ -62,7 +62,18 @@ export default function FamilyTreePage() {
   const [highlightId, setHighlightId] = useState(null);
   const [scrollTargetId, setScrollTargetId] = useState(null);
   const [treeOverflows, setTreeOverflows] = useState(false);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
   const treeScrollRef = useRef(null);
+  const topScrollRef = useRef(null);
+  const isSyncingTop = useRef(false);
+  const isSyncingTree = useRef(false);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftStartRef = useRef(0);
 
   const totalMembers = allPeople.length + 1; // +1 for the patriarch
 
@@ -103,12 +114,98 @@ export default function FamilyTreePage() {
     return () => clearTimeout(t);
   }, [highlightId]);
 
-  // A branch's chart can be wider than the screen on any device, not
-  // just phones — so instead of a fixed breakpoint, measure the actual
-  // scroll container: center it on first render (the root box sits in
-  // the middle of the full width, so centering brings it into view
-  // without a manual scroll) and show the "scroll for more" hint only
-  // when the chart genuinely doesn't fit.
+  const updateScrollMetrics = () => {
+    const el = treeScrollRef.current;
+    if (!el) {
+      setTreeOverflows(false);
+      setContentWidth(0);
+      setCanScrollLeft(false);
+      setCanScrollRight(false);
+      return;
+    }
+    const hasOverflow = el.scrollWidth > el.clientWidth + 2;
+    setTreeOverflows(hasOverflow);
+    setContentWidth(el.scrollWidth);
+    setCanScrollLeft(el.scrollLeft > 5);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+  };
+
+  // Synchronize top scroller with main tree scroller
+  const handleTopScroll = () => {
+    if (isSyncingTop.current) {
+      isSyncingTop.current = false;
+      return;
+    }
+    if (treeScrollRef.current && topScrollRef.current) {
+      isSyncingTree.current = true;
+      treeScrollRef.current.scrollLeft = topScrollRef.current.scrollLeft;
+      updateScrollMetrics();
+    }
+  };
+
+  const handleTreeScroll = () => {
+    if (isSyncingTree.current) {
+      isSyncingTree.current = false;
+      return;
+    }
+    if (topScrollRef.current && treeScrollRef.current) {
+      isSyncingTop.current = true;
+      topScrollRef.current.scrollLeft = treeScrollRef.current.scrollLeft;
+      updateScrollMetrics();
+    }
+  };
+
+  // Quick navigation helpers
+  const scrollLeftBy = () => {
+    if (treeScrollRef.current) {
+      treeScrollRef.current.scrollBy({ left: -360, behavior: "smooth" });
+    }
+  };
+
+  const scrollRightBy = () => {
+    if (treeScrollRef.current) {
+      treeScrollRef.current.scrollBy({ left: 360, behavior: "smooth" });
+    }
+  };
+
+  const centerTree = () => {
+    if (treeScrollRef.current) {
+      const center = Math.max(
+        0,
+        (treeScrollRef.current.scrollWidth - treeScrollRef.current.clientWidth) / 2
+      );
+      treeScrollRef.current.scrollTo({ left: center, behavior: "smooth" });
+      if (topScrollRef.current) {
+        topScrollRef.current.scrollTo({ left: center, behavior: "smooth" });
+      }
+    }
+  };
+
+  // Mouse drag-to-scroll on tree canvas
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return;
+    if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input")) return;
+    isDraggingRef.current = true;
+    setIsDragging(true);
+    startXRef.current = e.pageX - treeScrollRef.current.offsetLeft;
+    scrollLeftStartRef.current = treeScrollRef.current.scrollLeft;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDraggingRef.current || !treeScrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - treeScrollRef.current.offsetLeft;
+    const walk = (x - startXRef.current) * 1.4;
+    treeScrollRef.current.scrollLeft = scrollLeftStartRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    if (isDraggingRef.current) {
+      isDraggingRef.current = false;
+      setIsDragging(false);
+    }
+  };
+
   useEffect(() => {
     const el = treeScrollRef.current;
     if (!el) {
@@ -116,15 +213,22 @@ export default function FamilyTreePage() {
       return;
     }
 
-    const measure = () => {
-      setTreeOverflows(el.scrollWidth > el.clientWidth + 1);
+    const measureAndCenter = () => {
+      const centerPos = Math.max(0, (el.scrollWidth - el.clientWidth) / 2);
+      el.scrollLeft = centerPos;
+      if (topScrollRef.current) {
+        topScrollRef.current.scrollLeft = centerPos;
+      }
+      updateScrollMetrics();
     };
 
-    el.scrollLeft = Math.max(0, (el.scrollWidth - el.clientWidth) / 2);
-    measure();
+    const timer = setTimeout(measureAndCenter, 60);
 
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener("resize", updateScrollMetrics);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", updateScrollMetrics);
+    };
   }, [activeBranchId]);
 
   // Org-chart style box — a person's box, connected by lines to their
@@ -143,23 +247,22 @@ export default function FamilyTreePage() {
       cappedTier === 1
         ? "font-serif font-bold text-red-900 text-sm md:text-base"
         : cappedTier === 2
-        ? "font-semibold text-gray-800 text-xs md:text-sm"
-        : "font-medium text-gray-700 text-xs";
+          ? "font-semibold text-gray-800 text-xs md:text-sm"
+          : "font-medium text-gray-700 text-xs";
 
     const boxClass =
       cappedTier === 1
         ? "bg-white border-amber-300 shadow-md"
         : cappedTier === 2
-        ? "bg-white border-amber-200 shadow-sm"
-        : "bg-amber-50/70 border-amber-100";
+          ? "bg-white border-amber-200 shadow-sm"
+          : "bg-amber-50/70 border-amber-100";
 
     return (
       <li>
         <div
           id={printMode ? undefined : node._id}
-          className={`node-box inline-flex flex-col items-center gap-1 rounded-lg border ${boxClass} px-2 py-1.5 sm:px-3 sm:py-2 min-w-[68px] sm:min-w-[88px] transition-all ${
-            isMatched ? "ring-2 ring-amber-400" : ""
-          }`}
+          className={`node-box inline-flex flex-col items-center gap-1 rounded-lg border ${boxClass} px-2 py-1.5 sm:px-3 sm:py-2 min-w-[68px] sm:min-w-[88px] transition-all ${isMatched ? "ring-2 ring-amber-400" : ""
+            }`}
         >
           <span className={`${nameClass} text-center leading-tight`}>{node.name}</span>
           {hasKids && (
@@ -324,32 +427,28 @@ export default function FamilyTreePage() {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActiveBranchId(branch._id)}
-                className={`group relative flex flex-col items-center gap-2 rounded-2xl border p-4 md:p-5 text-center transition-all duration-300 ${
-                  isActive
+                className={`group relative flex flex-col items-center gap-2 rounded-2xl border p-4 md:p-5 text-center transition-all duration-300 ${isActive
                     ? "bg-gradient-to-b from-red-800 to-red-950 border-red-900 shadow-lg shadow-red-900/25 -translate-y-0.5"
                     : "bg-white border-amber-100 hover:border-amber-300 hover:bg-amber-50/60"
-                }`}
+                  }`}
               >
                 <span
-                  className={`w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center font-serif font-bold text-base transition-colors ${
-                    isActive
+                  className={`w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center font-serif font-bold text-base transition-colors ${isActive
                       ? "bg-white text-red-800"
                       : "bg-amber-50 text-red-800 group-hover:bg-amber-100"
-                  }`}
+                    }`}
                 >
                   {i + 1}
                 </span>
                 <span
-                  className={`font-serif font-bold text-xs sm:text-sm leading-tight line-clamp-2 ${
-                    isActive ? "text-white" : "text-red-800"
-                  }`}
+                  className={`font-serif font-bold text-xs sm:text-sm leading-tight line-clamp-2 ${isActive ? "text-white" : "text-red-800"
+                    }`}
                 >
                   {branch.name}
                 </span>
                 <span
-                  className={`text-[10px] sm:text-[11px] ${
-                    isActive ? "text-amber-200" : "text-gray-400"
-                  }`}
+                  className={`text-[10px] sm:text-[11px] ${isActive ? "text-amber-200" : "text-gray-400"
+                    }`}
                 >
                   {countDescendants(branch)} members
                 </span>
@@ -383,9 +482,69 @@ export default function FamilyTreePage() {
 
             {activeBranch.children && activeBranch.children.length > 0 ? (
               <>
+                {/* Sticky Top Scroller & Navigation Bar */}
+                {treeOverflows && (
+                  <div className="sticky top-20 z-30 -mx-5 md:-mx-8 px-5 md:px-8 py-2 mb-5 bg-gradient-to-r from-amber-50/95 via-white/95 to-amber-50/95 backdrop-blur-md border-y border-amber-200 shadow-xs transition-all">
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={scrollLeftBy}
+                        disabled={!canScrollLeft}
+                        title="Scroll Left"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white border border-amber-200 text-red-900 text-xs font-semibold hover:bg-amber-100 hover:border-amber-300 disabled:opacity-35 disabled:cursor-not-allowed shadow-2xs transition-colors shrink-0"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        <span className="hidden sm:inline">Left</span>
+                      </button>
+
+                      {/* Top Horizontal Scrollbar Track */}
+                      <div
+                        ref={topScrollRef}
+                        onScroll={handleTopScroll}
+                        className="tree-scrollbar overflow-x-auto overflow-y-hidden cursor-ew-resize py-0.5 rounded-full flex-1"
+                        style={{ WebkitOverflowScrolling: "touch" }}
+                        title="Drag slider to scroll horizontally"
+                        aria-label="Family tree horizontal scroller"
+                      >
+                        <div style={{ width: `${contentWidth}px`, height: "8px" }} />
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={scrollRightBy}
+                        disabled={!canScrollRight}
+                        title="Scroll Right"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white border border-amber-200 text-red-900 text-xs font-semibold hover:bg-amber-100 hover:border-amber-300 disabled:opacity-35 disabled:cursor-not-allowed shadow-2xs transition-colors shrink-0"
+                      >
+                        <span className="hidden sm:inline">Right</span>
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={centerTree}
+                        title="Center tree view"
+                        className="px-2.5 py-1 rounded-lg bg-white border border-amber-200 text-red-900 text-xs font-semibold hover:bg-amber-100 hover:border-amber-300 shadow-2xs transition-colors shrink-0"
+                      >
+                        Center
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div
                   ref={treeScrollRef}
-                  className="overflow-x-auto overflow-y-hidden pb-4 -mx-5 md:-mx-8 px-5 md:px-8"
+                  onScroll={handleTreeScroll}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUpOrLeave}
+                  onMouseLeave={handleMouseUpOrLeave}
+                  className={`no-scrollbar overflow-x-auto overflow-y-hidden pb-4 -mx-5 md:-mx-8 px-5 md:px-8 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+                    }`}
                 >
                   {/* the branch number is the root of the chart — one line
                       feeds down from it into the fan-out of children */}
@@ -402,11 +561,6 @@ export default function FamilyTreePage() {
                     </li>
                   </ul>
                 </div>
-                {treeOverflows && (
-                  <p className="text-center text-[11px] text-gray-400 mt-1">
-                    ← Scroll sideways to see the full tree →
-                  </p>
-                )}
               </>
             ) : (
               <p className="text-sm text-gray-400 italic">
@@ -452,10 +606,7 @@ export default function FamilyTreePage() {
           ))}
         </div>
 
-        <p className="text-center text-gray-400 text-xs pb-16 print:hidden">
-          🪔 This lineage record is maintained by the Trust. To add or correct a
-          name, please contact the Mandir office.
-        </p>
+
       </div>
     </div>
   );
