@@ -1,6 +1,9 @@
 {
   "name": "Late. Lala Sai Ram Mittal",
-  "related": ["Late. Lala Liti Ram Mittal"],
+  "ancestor": "Late. Lala Liti Ram Mittal",
+  "related": [
+    "Late. Lala Liti Ram Mittal"
+  ],
   "branches": [
     {
       "name": "Late. Lala Roop Ram Mittal",
@@ -11,7 +14,9 @@
             {
               "name": "Late. Chandan Singh Mittal",
               "children": [
-                { "name": "Ridhpal Mittal" }
+                {
+                  "name": "Ridhpal Mithal"
+                }
               ]
             }
           ]
@@ -20,143 +25,315 @@
           "name": "Late. Dhaniram Mittal",
           "children": [
             {
-              "name": "Late. Kishori Lal Mittal",
-              "children": [
-                { "name": "Late. Om Prakash Mittal" },
-                { "name": "Late. Radhe Lal Mittal" },
-                {
-                  "name": "Late. Krishan Lal Mittal",
-                  "children": [
-                    { "name": "Lala. Ambai Prasad Mittal" }
-                  ]
-                }
-              ]
-            },
-            {
               "name": "Late. Harishchand Mittal",
               "children": [
-                { "name": "Vinod Kumar Mittal" },
                 {
-                  "name": "Late. Lala Munna Mittal",
+                  "name": "Late. Vinod Kumar Mittal",
                   "children": [
                     {
-                      "name": "Late. Bhanwal Mittal",
+                      "name": "Ashish Mittal",
                       "children": [
-                        { "name": "Sunny Mittal" }
+                        {
+                          "name": "Shivansh Mittal"
+                        },
+                        {
+                          "name": "Vedant Mittal"
+                        }
                       ]
-                    },
-                    { "name": "Sandeep Mittal" }
+                    }
+                  ]
+                },
+                {
+                  "name": "Late. Lala Munna Lal Mittal",
+                  "children": [
+                    {
+                      "name": "Sandeep Mittal",
+                      "children": [
+                        {
+                          "name": "Shrey Mittal"
+                        }
+                      ]
+                    }
                   ]
                 },
                 {
                   "name": "Late. Lala Jagdish Prasad Mittal",
                   "children": [
                     {
-                      "name": "Shri. Pawan Kumar Mittal",
+                      "name": "Shri. Arun Kumar Mittal",
                       "children": [
-                        { "name": "Shivam Mittal" }
+                        {
+                          "name": "Naman Mittal"
+                        }
                       ]
                     },
                     {
-                      "name": "Shri. Arun Kumar Mittal",
+                      "name": "Shri. Pawan Kumar Mittal",
                       "children": [
-                        { "name": "Naman Mittal" }
+                        {
+                          "name": "Shivam Mittal"
+                        }
                       ]
                     },
                     {
                       "name": "Shri. Naveen Kumar Mittal",
                       "children": [
                         {
-                          "name": "Shri. Vivek Kumar Mittal",
+                          "name": "Shri. Vishal Mittal",
                           "children": [
-                            { "name": "Akshay Mittal" },
-                            { "name": "Tejas Mittal" }
+                            {
+                              "name": "Akshay"
+                            }
                           ]
                         },
-                        { "name": "Shri. Vishal Mittal" }
+                        {
+                          "name": "Shri. Vivek Kumar Mittal",
+                          "children": [
+                            {
+                              "name": "Tejas"
+                            }
+                          ]
+                        }
                       ]
                     }
                   ]
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Late. Lala Bihari Lal Mittal",
-      "children": [
-        {
-          "name": "Late. Khajan Singh Mittal",
-          "children": [
-            { "name": "Late. Dayanand Mittal" },
+            },
             {
-              "name": "Late. Ramanand Gupta",
+              "name": "Late. Kishori Lal Mittal",
               "children": [
                 {
-                  "name": "Shri. Brajesh Pal Gupta",
-                  "children": [
-                    { "name": "Shri. Vipin Mittal" }
-                  ]
+                  "name": "Late. Om Prakash Mittal"
                 },
                 {
-                  "name": "Shri. Anuj Mittal",
-                  "children": [
-                    { "name": "Shri. Aradhya Mittal" },
-                    { "name": "Shri. Amar Mittal" }
-                  ]
+                  "name": "Lala. Ambai Prasad Mittal"
                 },
-                { "name": "Shri. Bhopal Singh Mittal" },
                 {
-                  "name": "Shri. Rampal Gupta",
-                  "children": [
-                    {
-                      "name": "Shri. Gaurav Gupta",
-                      "children": [
-                        { "name": "Shri. Prithvi Raj Mittal" }
-                      ]
-                    },
-                    {
-                      "name": "Shri. Kapil Gupta",
-                      "children": [
-                        { "name": "Shri. Arjun Mittal" }
-                      ]
-                    }
-                  ]
+                  "name": "Late. Krishan Lal Mittal"
                 },
-                { "name": "Late. Ram Gopal Gupta" },
-                { "name": "Late. Ram Avtar Gupta" },
-                { "name": "Shri. Ram Niwas Gupta" },
                 {
-                  "name": "Late. Ganga Sharan Gupta",
-                  "children": [
-                    { "name": "Shri. Himanshu Gupta" }
-                  ]
-                },
-                { "name": "Late. Ramnath Mittal" },
-                {
-                  "name": "Dr. Alok Mittal",
-                  "children": [
-                    { "name": "Shri. Aryan Mittal" },
-                    {
-                      "name": "Shri. Vikas Mittal",
-                      "children": [
-                        { "name": "Shri. Aditya Mittal" }
-                      ]
-                    }
-                  ]
+                  "name": "Late. Radhe Lal Mittal"
                 }
               ]
             }
           ]
         },
         {
-          "name": "Late. Banvari Lal Mittal",
+          "name": "Late. Lala Bihari Lal Mittal",
           "children": [
-            { "name": "Late. Perumal Mittal" },
-            { "name": "Late. Baburam Mittal" },
-            { "name": "Late. Vaidnath Mittal" }
+            {
+              "name": "Late. Khajan Singh Mittal",
+              "children": [
+                {
+                  "name": "Late. Dayanand Mittal"
+                },
+                {
+                  "name": "Late. Ramanand Gupta",
+                  "children": [
+                    {
+                      "name": "Late. Ram Avtar Gupta"
+                    },
+                    {
+                      "name": "Shri. Ram Niwas Gupta"
+                    },
+                    {
+                      "name": "Shri. Rampal Gupta",
+                      "children": [
+                        {
+                          "name": "Shri. Gaurav Gupta",
+                          "children": [
+                            {
+                              "name": "Shri. Prithvi Raj Mittal"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Shri. Kapil Gupta",
+                          "children": [
+                            {
+                              "name": "Shri. Arjun Mittal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Shri. Bhopal Singh Mittal",
+                      "children": [
+                        {
+                          "name": "Shri. Anuj Mittal",
+                          "children": [
+                            {
+                              "name": "Shri. Arnav Mittal"
+                            },
+                            {
+                              "name": "Shri. Aradhya Mittal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Shri. Brajjesh Pal Gupta",
+                      "children": [
+                        {
+                          "name": "Shri. Vipin Mittal"
+                        },
+                        {
+                          "name": "Shri. Amit Mittal",
+                          "children": [
+                            {
+                              "name": "Shri. Vihan Mittal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Late. Ram Gopal Gupta",
+                      "children": [
+                        {
+                          "name": "Dr. Alok Mittal",
+                          "children": [
+                            {
+                              "name": "Shri. Aryan Mittal"
+                            },
+                            {
+                              "name": "Shri. Aditya Mittal"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Shri. Vikas Mittal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Late. Bhasval Mittal"
+                }
+              ]
+            },
+            {
+              "name": "Late. Banvari Lal Mittal",
+              "children": [
+                {
+                  "name": "Late. Ferumal Mittal"
+                },
+                {
+                  "name": "Late. Vaidnath Mittal"
+                },
+                {
+                  "name": "Late. Baburam Mittal"
+                }
+              ]
+            },
+            {
+              "name": "Late. Lala Balwant Singh Mittal",
+              "children": [
+                {
+                  "name": "Late. Ramnath Mithal"
+                },
+                {
+                  "name": "Late. Ganga Sharan Mittal",
+                  "children": [
+                    {
+                      "name": "Shri. Himanshu Gupta"
+                    }
+                  ]
+                },
+                {
+                  "name": "Late. Seth Hira Lal Mithal",
+                  "children": [
+                    {
+                      "name": "Late. Ved Prakash Mithal",
+                      "children": [
+                        {
+                          "name": "Shri. Alkesh Mithal",
+                          "children": [
+                            {
+                              "name": "Shri. Anant Mithal"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Shri. Aroop Mithal",
+                          "children": [
+                            {
+                              "name": "Shri. Archit Mithal"
+                            },
+                            {
+                              "name": "Shri. Arnav Mithal"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Shri. Dr. Ashu Mithal",
+                          "children": [
+                            {
+                              "name": "Shri. Aditya Mithal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Late. Maya Prakash Mithal",
+                      "children": [
+                        {
+                          "name": "Shri. Trilok Raj Mithal Urf Rajeev Mithal",
+                          "children": [
+                            {
+                              "name": "Shri. Shikhar Mithal"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Late. Sanjeev Kumar Mithal",
+                          "children": [
+                            {
+                              "name": "Shri. Saransh Mithal"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Shri. Amit Mithal"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Shri. Dr. Satya Prakash Mithal",
+                      "children": [
+                        {
+                          "name": "Shri. Dr Umang Mithal",
+                          "children": [
+                            {
+                              "name": "Shri. Diyansh Mithal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Shri. Vijay Prakash Mithal"
+                    },
+                    {
+                      "name": "Shri. Ajay Prakash Mithal",
+                      "children": [
+                        {
+                          "name": "Shri. Vibhor Mithal"
+                        },
+                        {
+                          "name": "Shri. Ishan Mithal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]
@@ -164,76 +341,20 @@
     {
       "name": "Late. Daulat Ram Mittal",
       "children": [
-        { "name": "Late. Nathumal Mittal" },
-        { "name": "Late. Prem Sunder Mittal" },
         {
-          "name": "Late. Lala Balwant Singh Mittal",
-          "children": [
-            {
-              "name": "Late. Sant Hira Lal Mittal",
-              "children": [
-                {
-                  "name": "Shri. Dr. Satya Prakash Mittal",
-                  "children": [
-                    { "name": "Shri. Dr. Umang Mittal" }
-                  ]
-                },
-                {
-                  "name": "Late. Vidya Prakash Mittal",
-                  "children": [
-                    { "name": "Shri. Amit Mittal" },
-                    {
-                      "name": "Late. Ved Prakash Mittal",
-                      "children": [
-                        {
-                          "name": "Shri. Dr. Ashu Mittal",
-                          "children": [
-                            { "name": "Shri. Amit Mittal" }
-                          ]
-                        },
-                        {
-                          "name": "Shri. Anoop Mittal",
-                          "children": [
-                            { "name": "Shri. Aditya Mittal" },
-                            { "name": "Shri. Ankit Mittal" },
-                            { "name": "Shri. Anmol Mittal" }
-                          ]
-                        },
-                        {
-                          "name": "Shri. Trilok Raj Mittal",
-                          "children": [
-                            { "name": "Shri. Shekhar Mittal" },
-                            { "name": "Shri. Saransh Mittal" },
-                            { "name": "Late. Sanjeev Kumar Mittal" }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "Shri. Ajay Prakash Mittal",
-                  "children": [
-                    { "name": "Shri. Ishan Mittal" }
-                  ]
-                },
-                {
-                  "name": "Shri. Vijay Prakash Mittal",
-                  "children": [
-                    { "name": "Shri. Vibhor Mittal" }
-                  ]
-                },
-                { "name": "Shri. Dipansh Mittal" }
-              ]
-            }
-          ]
+          "name": "Late. Prem Sunder Mittal"
+        },
+        {
+          "name": "Late. Nathumal Mittal"
         }
       ]
     },
     {
-      "name": "Late. Ramji Lal Mittal",
+      "name": "Late. Ramji Lal Mithal",
       "children": [
-        { "name": "Late. Mandir Ji" }
+        {
+          "name": "Late. Mandir Ji"
+        }
       ]
     }
   ]
